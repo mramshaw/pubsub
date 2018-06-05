@@ -143,7 +143,7 @@ $ bin/zookeeper-server-start.sh config/zookeeper.properties
 
 #### Kafka
 
-In a new window, start `kafka` as follows:
+In a new console, start `kafka` as follows:
 
 ```
 $ bin/kafka-server-start.sh config/server.properties
@@ -151,9 +151,9 @@ $ bin/kafka-server-start.sh config/server.properties
 [2018-06-05 15:12:16,412] INFO [Kafka Server 0], started (kafka.server.KafkaServer)
 ```
 
-####  Create a topic
+#### Create a topic
 
-In a third window, create a topic as follows:
+In a third console, create a topic as follows:
 
 ```
 $ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic news
@@ -169,9 +169,9 @@ news
 $
 ```
 
-####  Pass messages
+#### Pass messages
 
-In the third window, open a publisher as follows:
+In the third console, open a publisher as follows:
 
 ```
 $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
@@ -181,7 +181,7 @@ $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
 
 [And type a message for broadcasting.]
 
-In a fourth window, open a subscriber as follows:
+In a fourth console, open a subscriber as follows:
 
 ```
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news
@@ -193,7 +193,7 @@ Note that the recently published message is not received. Let's fix that:
 ```
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news
 ^CProcessed a total of 0 messages
-owner@G30AB:~/Documents/Kafka/kafka_2.11-0.11.0.0$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
 Kafka is UP!
 
 ```
@@ -201,7 +201,7 @@ Kafka is UP!
 [First we entered Ctrl-C to kill the subscriber. Then we restarted the subscriber
  with the `--from-beginning` option so as to get all previously published messages.]
 
-And now our publisher operates as expected:
+And now our publisher (third console) operates as expected:
 
 ```
 $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
@@ -210,14 +210,15 @@ $ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
 >
 ```
 
-And our subscriber erceives the latest message:
+And our subscriber (fourth console) receives the latest message:
 
 ```
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
 Kafka is UP!
 Hello?
-
 ```
+
+[From the above it should be apparent that Kafka caches (stores) messages.]
 
 #### Cleanup
 
