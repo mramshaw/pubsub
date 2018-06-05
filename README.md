@@ -2,9 +2,9 @@
 
 Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) systems.
 
-The general concept seems to be that __publishers__ create messages and _publish_ them to a given topic.
-__Subscribers__ receive messages by _subscribing_ to a specific topic (or topics). __Message Brokers__
-may (or may not) handle the enqueueing and/or dispersal of the messages.
+The general concept seems to be that __publishers__ create messages and _publish_ them to a given
+__channel__ or __topic__. And __Subscribers__ receive messages by _subscribing_ to specific channel(s)
+or topic(s). __Message Brokers__ may (or may not) handle the enqueueing and/or dispersal of the messages.
 
 ## MQTT and Mosquitto
 
@@ -19,15 +19,17 @@ subscribed in order to receive them.
 
 ## ZeroMQ
 
-Unusually, this is more of a protocol than middleware. Think sockets on steroids.
+Unusually, [ZeroMQ](http://zeromq.org/) is more of a protocol than middleware. Think sockets on steroids.
 
 ## Redis
 
-[Perhaps not the ideal use case for Redis, but as Redis is widely deployed perhaps
- worth considering. In any case, a useful tool for exploring how pub/sub works.]
+[Perhaps not the ideal use case for [Redis](https://redis.io/), but as Redis is widely
+ deployed perhaps worth considering. In any case, a useful tool for exploring how pub/sub works.]
 
 Messages are not queued; as with [MQTT and Mosquitto](#mqtt-and-mosquitto) listeners
 need to be actively subscribed in order to receive them.
+
+Offers no persistence and no delivery guarantees.
 
 #### Start Redis
 
@@ -104,7 +106,16 @@ docker-compose down
 
 ## Kafka
 
-Built on top of Apache Zookeeper.
+Like [redis](#redis), Kafka is a multi-use storage application that can be
+used (among other things) for pub/sub messaging.
+
+It is written in [Scala](https://www.scala-lang.org/), which requires a JVM
+(Java Virtual Machine) to run.
+
+Builds on [Apache Zookeeper](https://zookeeper.apache.org/), which is much like
+[etcd](https://github.com/coreos/etcd).
+
+There is also a pure Golang implementation, [Jocko](https://github.com/travisjeffery/jocko).
 
 ## To Do
 
