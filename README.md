@@ -9,9 +9,9 @@ Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93sub
     * [Start Redis](#start-redis)
     * [Register a subscriber](#register-a-subscriber)
     * [Publish a message](#publish-a-message)
+    * [Useful commands](#useful-commands)
     * [Close down the publisher and subscriber](#close-down-the-publisher-and-subscriber)
     * [Close down the broker](#close-down-the-broker)
-    * [Useful commands](#useful-commands)
 * [Kafka](#kafka)
     * [Java](#java)
     * [Zookeeper](#zookeeper)
@@ -73,6 +73,8 @@ Reading messages... (press Ctrl-C to quit)
 3) (integer) 1
 ```
 
+[In Redis, a return code of 1 usually indicates success while 0 usually indicates failure.]
+
 #### Publish a message
 
 In a third console, use the `redis-cli` command to publish a message to the news topic, as follows:
@@ -110,6 +112,8 @@ In the second console, the following commands may be interesting:
 2) (integer) 1
 127.0.0.1:6379>
 ```
+
+[List the channels & List the number of subscribers to the news channel.]
 
 #### Close down the publisher and subscriber
 
