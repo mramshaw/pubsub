@@ -106,6 +106,9 @@ docker-compose down
 
 ## Kafka
 
+[Apache Kafka](https://kafka.apache.org/) describes itself as _a distributed
+streaming platform_.
+
 Like [redis](#redis), Kafka is a multi-use storage application that can be
 used (among other things) for pub/sub messaging.
 
@@ -117,9 +120,147 @@ Builds on [Apache Zookeeper](https://zookeeper.apache.org/), which is much like
 
 There is also a pure Golang implementation, [Jocko](https://github.com/travisjeffery/jocko).
 
+#### Java
+
+Verify `java` is installed:
+
+```
+$ java -version
+openjdk version "1.8.0_171"
+OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-0ubuntu0.16.04.1-b11)
+OpenJDK 64-Bit Server VM (build 25.171-b11, mixed mode)
+$
+```
+
+#### Zookeeper
+
+Start `zookeeper` (bundled with Kafka) as follows:
+
+```
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+<...>
+```
+
+#### Kafka
+
+In a new window, start `kafka` as follows:
+
+```
+$ bin/kafka-server-start.sh config/server.properties
+<...>
+[2018-06-05 15:12:16,412] INFO [Kafka Server 0], started (kafka.server.KafkaServer)
+```
+
+####  Create a topic
+
+In a third window, create a topic as follows:
+
+```
+$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic news
+Created topic "news".
+$
+```
+
+And verify the topic was created, as follows:
+
+```
+$ bin/kafka-topics.sh --list --zookeeper localhost:2181
+news
+$
+```
+
+####  Pass messages
+
+In the third window, open a publisher as follows:
+
+```
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
+>Kafka is UP!
+>
+```
+
+[And type a message for broadcasting.]
+
+In a fourth window, open a subscriber as follows:
+
+```
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news
+
+```
+
+Note that the recently published message is not received. Let's fix that:
+
+```
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news
+^CProcessed a total of 0 messages
+owner@G30AB:~/Documents/Kafka/kafka_2.11-0.11.0.0$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
+Kafka is UP!
+
+```
+
+[First we entered Ctrl-C to kill the subscriber. Then we restarted the subscriber
+ with the `--from-beginning` option so as to get all previously published messages.]
+
+And now our publisher operates as expected:
+
+```
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
+>Kafka is UP!
+>Hello?
+>
+```
+
+And our subscriber erceives the latest message:
+
+```
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
+Kafka is UP!
+Hello?
+
+```
+
+#### Cleanup
+
+Now kill everything with Ctrl-C.
+
+Subscriber:
+
+```
+$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic news --from-beginning
+Kafka is UP!
+Hello?
+^CProcessed a total of 2 messages
+$
+```
+
+Publisher:
+
+```
+$ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic news
+>Kafka is UP!
+>Hello?
+>^C$
+```
+
+Kafka:
+
+```
+<...>
+[2018-06-05 15:51:45,855] INFO [Kafka Server 0], shut down completed (kafka.server.KafkaServer)
+$
+```
+
+Zookeeper:
+
+```
+<...>
+[2018-06-05 15:51:45,854] INFO Closed socket connection for client /127.0.0.1:45648 which had sessionid 0x163d20186a50000 (org.apache.zookeeper.server.NIOServerCnxn)
+^C$
+```
+
 ## To Do
 
 - [ ] Explore ZeroMQ
-- [ ] Flesh out the Kafka messaging details
+- [x] Flesh out the Kafka messaging details
 - [ ] Investigate [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/SMSMessages.html)
 - [ ] Investigate [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/)
