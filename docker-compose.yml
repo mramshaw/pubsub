@@ -1,0 +1,14 @@
+version: '2'
+
+networks:
+  redis-messaging:
+
+services:
+
+    redis:
+        image: redis:4.0.9-alpine
+        networks:
+          - redis-messaging
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
