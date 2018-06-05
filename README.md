@@ -8,15 +8,18 @@ Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93sub
 * [Redis](#redis)
     * [Start Redis](#start-redis)
     * [Register a subscriber](#register-a-subscriber)
+    * [Publish a message](#publish-a-message)
+    * [Close down the publisher and subscriber](#close-down-the-publisher-and-subscriber)
     * [Close down the broker](#close-down-the-broker)
+    * [Useful commands](#useful-commands)
 * [Kafka](#kafka)
     * [Java](#java)
     * [Zookeeper](#zookeeper)
-    * [Kafka](#kafka)
+    * [Start Kafka](#start-kafka)
     * [Create a topic](#create-a-topic)
     * [Pass messages](#pass-messages)
     * [Cleanup](#cleanup)
-* [To Do](#todo)
+* [To Do](#to-do)
 
 ## Concepts
 
@@ -70,9 +73,9 @@ Reading messages... (press Ctrl-C to quit)
 3) (integer) 1
 ```
 
-#### Publish a message to the news topic
+#### Publish a message
 
-In a third console, use the `redis-cli` command to publish a message, as follows:
+In a third console, use the `redis-cli` command to publish a message to the news topic, as follows:
 
 ```
 $ redis-cli
@@ -159,7 +162,7 @@ $ bin/zookeeper-server-start.sh config/zookeeper.properties
 <...>
 ```
 
-#### Kafka
+#### Start Kafka
 
 In a new console, start `kafka` as follows:
 
