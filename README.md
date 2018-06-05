@@ -2,6 +2,24 @@
 
 Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) systems.
 
+* [Concepts](#concepts)
+* [MQTT and Mosquitto](#mqtt-and-mosquitto)
+* [ZeroMQ](#zeromq)
+* [Redis](#redis)
+    * [Start Redis](#start-redis)
+    * [Register a subscriber](#register-a-subscriber)
+    * [Close down the broker](#close-down-the-broker)
+* [Kafka](#kafka)
+    * [Java](#java)
+    * [Zookeeper](#zookeeper)
+    * [Kafka](#kafka)
+    * [Create a topic](#create-a-topic)
+    * [Pass messages](#pass-messages)
+    * [Cleanup](#cleanup)
+* [To Do](#todo)
+
+## Concepts
+
 The general concept seems to be that __publishers__ create messages and _publish_ them to a given
 __channel__ or __topic__. And __Subscribers__ receive messages by _subscribing_ to specific channel(s)
 or topic(s). __Message Brokers__ may (or may not) handle the enqueueing and/or dispersal of the messages.
@@ -33,15 +51,15 @@ Offers no persistence and no delivery guarantees.
 
 #### Start Redis
 
-In a terminal, execute the following command to start Redis:
+In a console, execute the following command to start Redis:
 
 ```
-docker-compose up
+$ docker-compose up
 ```
 
 #### Register a subscriber
 
-In another terminal, use the `redis-cli` command to subscribe to a topic, as follows:
+In another console, use the `redis-cli` command to subscribe to a topic, as follows:
 
 ```
 $ redis-cli
@@ -54,7 +72,7 @@ Reading messages... (press Ctrl-C to quit)
 
 #### Publish a message to the news topic
 
-In a third terminal, use the `redis-cli` command to publish a message, as follows:
+In a third console, use the `redis-cli` command to publish a message, as follows:
 
 ```
 $ redis-cli
@@ -63,7 +81,7 @@ $ redis-cli
 127.0.0.1:6379>
 ```
 
-In the second terminal, the subscriber should echo the message sent:
+In the second console, the subscriber should echo the message sent:
 
 ```
 $ redis-cli
@@ -79,7 +97,7 @@ Reading messages... (press Ctrl-C to quit)
 
 #### Useful commands
 
-In the second terminal, the following commands may be interesting:
+In the second console, the following commands may be interesting:
 
 ```
 127.0.0.1:6379> pubsub channels
@@ -92,11 +110,11 @@ In the second terminal, the following commands may be interesting:
 
 #### Close down the publisher and subscriber
 
-Either type `exit` or Ctrl-C in the second and third terminals to terminate.
+Either type `exit` or Ctrl-C in the second and third console to terminate.
   
 #### Close down the broker
 
-Shut down Redis (first terminal) with Ctrl-C.
+Shut down Redis (first console) with Ctrl-C.
 
 And:
 
