@@ -2,6 +2,10 @@
 
 Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) systems.
 
+In the examples below, the instructions will be for the _simplest possible configuration_. It is possible
+to run both Redis and Kafka clusters, but for learning purposes it will suffice to use a single instance
+of either.
+
 * [Concepts](#concepts)
 * [MQTT and Mosquitto](#mqtt-and-mosquitto)
 * [ZeroMQ](#zeromq)
@@ -243,7 +247,10 @@ Kafka is UP!
 Hello?
 ```
 
-[From the above it should be apparent that Kafka caches (stores) messages.]
+[From the above it should be apparent that Kafka caches (stores) messages. Also, it does not
+ seem to track which messages have been _consumed_ either - this seems to be a _subscriber_
+ responsibility. For instance, specifying `from-beginning` (or any other constant offset)
+ will mean that the subscriber messages will always start with the same message.]
 
 #### Cleanup
 
