@@ -41,8 +41,9 @@ I'm starting here because the ground is familiar:
 
 __MQTT__ is the protocol and __Mosquitto__ is a message broker.
 
-Depending on the specified [QoS](#qos) and [retention](#retention), messages may or may not be queued; as
-with [redis](#redis) listeners may need to be actively subscribed in order to receive messages.
+Depending on the specified [QoS](#qos) and [Message Retention](#message-retention), messages may or may
+not be queued; as with [redis](#redis) listeners may need to be actively subscribed in order to receive
+messages.
 
 #### QoS
 
