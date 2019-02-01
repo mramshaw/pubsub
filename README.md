@@ -41,6 +41,11 @@ I'm starting here because the ground is familiar:
 
 __MQTT__ is the protocol and __Mosquitto__ is a message broker.
 
+MQTT was specifically designed for unreliable networks, and so includes a __Last Will and Testament__
+(LWT) feature. This is to handle the situation where clients unexpectedly drop or get disconnected - so
+that closedown handling can be invoked (for a clean shutdown, for instance). The __Keep Alive__ feature
+is of course important for determining the timing of when the LWT processing is invoked.
+
 Depending on the specified [QoS](#qos) and [Message Retention](#message-retention), messages may or may
 not be queued; as with [redis](#redis) listeners may need to be actively subscribed in order to receive
 messages.
@@ -53,6 +58,14 @@ Valid values for Quality of Service are:
 - 1 [at least once]
 - 2 [exactly once]
 
+QoS 0 is also referred to as "fire and forget" meaning these messages may or may not actually be delivered.
+
+Messages published with QoS greater than zero will be queued, however the broker will respect the QoS
+requested by the client - in which case the QoS may be downgraded.
+
+QoS 2 is the most costly delivery mechanism. With QoS 1 the client must be capable of handling duplicated
+messages.
+
 #### Message Retention
 
 Published messages may (or may not) be specified for retention.
@@ -60,6 +73,8 @@ Published messages may (or may not) be specified for retention.
 If specified, the message is saved by the broker as the last known good value for the specific topic.
 
 When a new client subscribes to a topic, they receive the last message that is retained on that topic.
+
+[The broker stores only one retained message per topic.]
 
 ## ZeroMQ
 
