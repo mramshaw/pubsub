@@ -9,7 +9,7 @@ of either.
 * [Concepts](#concepts)
 * [MQTT and Mosquitto](#mqtt-and-mosquitto)
    * [QoS](#qos)
-   * [retention](#retention)
+   * [Message Retention](#message-retention)
 * [ZeroMQ](#zeromq)
 * [Redis](#redis)
     * [Start Redis](#start-redis)
@@ -52,7 +52,7 @@ Valid values for Quality of Service are:
 - 1 [at least once]
 - 2 [exactly once]
 
-#### Retention
+#### Message Retention
 
 Published messages may (or may not) be specified for retention.
 
