@@ -56,6 +56,10 @@ Valid values for Quality of Service are:
 
 Published messages may (or may not) be specified for retention.
 
+If specified, the message is saved by the broker as the last known good value for the specific topic.
+
+When a new client subscribes to a topic, they receive the last message that is retained on that topic.
+
 ## ZeroMQ
 
 Unusually, [ZeroMQ](http://zeromq.org/) is more of a protocol than middleware. Think sockets on steroids.
