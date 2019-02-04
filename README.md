@@ -10,6 +10,7 @@ of either.
 * [MQTT and Mosquitto](#mqtt-and-mosquitto)
    * [QoS](#qos)
    * [Message Retention](#message-retention)
+* [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [ZeroMQ](#zeromq)
 * [Redis](#redis)
     * [Start Redis](#start-redis)
@@ -29,8 +30,8 @@ of either.
 
 ## Concepts
 
-The general concept seems to be that __publishers__ create messages and _publish_ them to a given
-__channel__ or __topic__. And __Subscribers__ receive messages by _subscribing_ to specific channel(s)
+The general concept is that __publishers__ create messages and ___publish___ them to a given
+__channel__ or __topic__. And __Subscribers__ receive messages by ___subscribing___ to specific channel(s)
 or topic(s). __Message Brokers__ may (or may not) handle the enqueueing and/or dispersal of the messages.
 
 ## MQTT and Mosquitto
@@ -75,6 +76,13 @@ If specified, the message is saved by the broker as the last known good value fo
 When a new client subscribes to a topic, they receive the last message that is retained on that topic.
 
 [The broker stores only one retained message per topic.]
+
+## Google Cloud Pub/Sub
+
+Like MQTT QoS 0 or [redis](#redis), [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) is also
+apparently "fire and forget" meaning messages may or may not actually be delivered.
+
+Supports large-scale messaging over HTTP (REST) or [gRPC](http://www.grpc.io/).
 
 ## ZeroMQ
 
