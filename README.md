@@ -26,6 +26,7 @@ of either.
     * [Create a topic](#create-a-topic)
     * [Pass messages](#pass-messages)
     * [Cleanup](#cleanup)
+* [Reference](#reference)
 * [To Do](#to-do)
 
 ## Concepts
@@ -97,6 +98,10 @@ Messages are not queued; as with [MQTT and Mosquitto](#mqtt-and-mosquitto) liste
 need to be actively subscribed in order to receive them.
 
 Offers no persistence and no delivery guarantees.
+
+Check out the following link for Salvatore Sanfilippo's thoughts on Redis and Pub/Sub:
+
+    http://oldblog.antirez.com/post/redis-weekly-update-3-publish-submit.html
 
 #### Start Redis
 
@@ -332,6 +337,14 @@ Zookeeper:
 [2018-06-05 15:51:45,854] INFO Closed socket connection for client /127.0.0.1:45648 which had sessionid 0x163d20186a50000 (org.apache.zookeeper.server.NIOServerCnxn)
 ^C$
 ```
+
+## Reference
+
+Salvatore Sanfilippo (antirez) on Redis and Pub/Sub:
+
+    http://oldblog.antirez.com/post/redis-weekly-update-3-publish-submit.html
+
+[For anyone interested in Redis, the antirez weblog is a great resource.]
 
 ## To Do
 
