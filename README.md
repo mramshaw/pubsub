@@ -85,6 +85,15 @@ apparently "fire and forget" meaning messages may or may not actually be deliver
 
 Supports large-scale messaging over HTTP (REST) or [gRPC](http://www.grpc.io/).
 
+Note that, as with most messaging solutions, Cloud Pub/Sub doesn't guarantee the order of the messages.
+
+After successfully pulling a message and processing it, you are supposed to __acknowledge__  the message
+(this means notifying Google Cloud Pub/Sub that you successfully received the message). You may also
+`--auto-ack` the message or messages, which automatically pulls and acknowledges the message or messages.
+
+Failure to acknowledge the message withing the __acknowledgement deadline__ period will result in the
+message being re-sent.
+
 ## ZeroMQ
 
 Unusually, [ZeroMQ](http://zeromq.org/) is more of a protocol than middleware. Think sockets on steroids.
@@ -352,4 +361,4 @@ Salvatore Sanfilippo (antirez) on Redis and Pub/Sub:
 - [x] Add QoS and retention notes for MQTT 
 - [x] Flesh out the Kafka messaging details
 - [ ] Investigate [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/SMSMessages.html)
-- [ ] Investigate [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/)
+- [x] Investigate [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/)
