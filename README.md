@@ -1,6 +1,6 @@
 # Adventures in Messaging
 
-Noodling around with [pub/sub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) systems.
+Noodling around with [pub/sub](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) systems.
 
 In the examples below, the instructions will be for the _simplest possible configuration_. It is possible
 to run both Redis and Kafka clusters, but for learning purposes it will suffice to use a single instance
@@ -11,6 +11,7 @@ of either.
    * [QoS](#qos)
    * [Message Retention](#message-retention)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
+* [Amazon Simple Notification Service](#amazon-simple-notification-service)
 * [ZeroMQ](#zeromq)
 * [Redis](#redis)
     * [Start Redis](#start-redis)
@@ -39,7 +40,7 @@ or topic(s). __Message Brokers__ may (or may not) handle the enqueueing and/or d
 
 I'm starting here because the ground is familiar:
 
-    https://github.com/mramshaw/MQTT_and_mosquitto
+    http://github.com/mramshaw/MQTT_and_mosquitto
 
 __MQTT__ is the protocol and __Mosquitto__ is a message broker.
 
@@ -80,7 +81,7 @@ When a new client subscribes to a topic, they receive the last message that is r
 
 ## Google Cloud Pub/Sub
 
-Like MQTT QoS 0 or [redis](#redis), [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) is also
+Like MQTT QoS 0 or [redis](#redis), [Google Cloud Pub/Sub](http://cloud.google.com/pubsub/docs/) is also
 apparently "fire and forget" meaning messages may or may not actually be delivered.
 
 Supports large-scale messaging over HTTP (REST) or [gRPC](http://www.grpc.io/).
@@ -91,8 +92,20 @@ After successfully pulling a message and processing it, you are supposed to __ac
 (this means notifying Google Cloud Pub/Sub that you successfully received the message). You may also
 `--auto-ack` the message or messages, which automatically pulls and acknowledges the message or messages.
 
-Failure to acknowledge the message withing the __acknowledgement deadline__ period will result in the
+Failure to acknowledge the message within the __acknowledgement deadline__ period will result in the
 message being re-sent.
+
+## Amazon Simple Notification Service
+
+Supported protocols:
+
+1. [Amazon SQS](http://aws.amazon.com/sqs/)
+2. HTTP/S
+3. email
+4. [SMS](http://en.wikipedia.org/wiki/SMS)
+5. Lambda
+
+[From: http://docs.aws.amazon.com/sns/latest/dg/welcome.html]
 
 ## ZeroMQ
 
@@ -100,7 +113,7 @@ Unusually, [ZeroMQ](http://zeromq.org/) is more of a protocol than middleware. T
 
 ## Redis
 
-[Perhaps not the ideal use case for [Redis](https://redis.io/), but as Redis is widely
+[Perhaps not the ideal use case for [Redis](http://redis.io/), but as Redis is widely
  deployed perhaps worth considering. In any case, a useful tool for exploring how pub/sub works.]
 
 Messages are not queued; as with [MQTT and Mosquitto](#mqtt-and-mosquitto) listeners
@@ -191,19 +204,19 @@ docker-compose down
 
 ## Kafka
 
-[Apache Kafka](https://kafka.apache.org/) describes itself as _a distributed
+[Apache Kafka](http://kafka.apache.org/) describes itself as _a distributed
 streaming platform_.
 
 Like [redis](#redis), Kafka is a multi-use storage application that can be
 used (among other things) for pub/sub messaging.
 
-It is written in [Scala](https://www.scala-lang.org/), which requires a JVM
+It is written in [Scala](http://www.scala-lang.org/), which requires a JVM
 (Java Virtual Machine) to run.
 
-Builds on [Apache Zookeeper](https://zookeeper.apache.org/), which is much like
-[etcd](https://github.com/coreos/etcd).
+Builds on [Apache Zookeeper](http://zookeeper.apache.org/), which is much like
+[etcd](http://github.com/coreos/etcd).
 
-There is also a pure Golang implementation, [Jocko](https://github.com/travisjeffery/jocko).
+There is also a pure Golang implementation, [Jocko](http://github.com/travisjeffery/jocko).
 
 #### Java
 
@@ -360,5 +373,5 @@ Salvatore Sanfilippo (antirez) on Redis and Pub/Sub:
 - [ ] Explore ZeroMQ
 - [x] Add QoS and retention notes for MQTT 
 - [x] Flesh out the Kafka messaging details
-- [ ] Investigate [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/SMSMessages.html)
-- [x] Investigate [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/)
+- [x] Investigate [Google Cloud Pub/Sub](http://cloud.google.com/pubsub/docs/)
+- [x] Investigate [Amazon SNS](http://docs.aws.amazon.com/sns/latest/dg/welcome.html)
