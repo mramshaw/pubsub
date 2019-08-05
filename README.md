@@ -12,6 +12,7 @@ of either.
    * [Message Retention](#message-retention)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [Amazon Simple Notification Service](#amazon-simple-notification-service)
+* [RabbitMQ](#rabbitmq)
 * [ZeroMQ](#zeromq)
 * [Redis](#redis)
     * [Start Redis](#start-redis)
@@ -106,6 +107,18 @@ Supported protocols:
 5. Lambda
 
 [From: http://docs.aws.amazon.com/sns/latest/dg/welcome.html]
+
+## RabbitMQ
+
+Supported protocols:
+
+1. AMQP 0-9-1
+2. [STOMP](http://stomp.github.io/)
+3. MQTT
+4. AMQP 1.0
+5. HTTP and WebSockets
+
+[From: http://www.rabbitmq.com/protocols.html]
 
 ## ZeroMQ
 
@@ -374,4 +387,5 @@ Salvatore Sanfilippo (antirez) on Redis and Pub/Sub:
 - [x] Add QoS and retention notes for MQTT 
 - [x] Flesh out the Kafka messaging details
 - [x] Investigate [Google Cloud Pub/Sub](http://cloud.google.com/pubsub/docs/)
-- [x] Investigate [Amazon SNS](http://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+- [ ] Investigate [Amazon SNS](http://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+- [ ] Investigate [RabbitMQ](http://www.rabbitmq.com/) and [RabbitMQ as a Service](http://www.cloudamqp.com/)
